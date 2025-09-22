@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Client — UPI Payment</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Minimal fallback styles if style.css isn't present */
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 0; padding: 20px; background: #0f172a; color: #e5e7eb; }
+    .card { max-width: 520px; margin: 0 auto; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15); border-radius: 14px; padding: 16px 18px; }
+    h1 { margin: 0 0 8px; font-size: 20px; font-weight: 800; }
+    .row { display: flex; gap: 8px; margin-top: 10px; }
+    input[type="number"] { flex: 1; padding: 10px 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.08); color: #fff; outline: none; }
+    button { padding: 10px 14px; border-radius: 10px; border: none; font-weight: 700; cursor: pointer; background: #6366f1; color: white; }
+    button.cancel { background: rgba(239,68,68,.9); }
+    .kv { margin-top: 12px; line-height: 1.8; }
+    .actions { margin-top: 10px; display: flex; gap: 8px; }
+    .muted { color: #9ca3af; margin-top: 6px; }
+    .hidden { display: none !important; }
+    #serverDown { margin-top: 16px; font-weight: 800; text-align: center; color: #fca5a5; }
+  </style>
+</head>
+<body>
+  <div class="card" id="app">
+    <h1>Client Payment</h1>
+    <p id="status" class="muted"></p>
+
+    <!-- Amount input row -->
+    <div id="amountRow" class="row">
+      <input id="amountInput" type="number" placeholder="Enter amount" min="1" />
+      <button id="primaryBtn">Pay</button>
+    </div>
+
+    <!-- Live status block -->
+    <div id="kvBlock" class="kv hidden">
+      <div><strong>Amount:</strong> <span id="amountOut">—</span></div>
+      <div><strong>Status:</strong> <span id="statusOut">—</span></div>
+      <div><strong>Time left:</strong> <span id="timer">00:00</span></div>
+      <div class="actions">
+        <!-- NEW: visible only while session is active -->
+        <button id="cancelBtn" class="cancel hidden">Cancel</button>
+      </div>
+    </div>
+
+    <!-- Server down message -->
+    <div id="serverDown" class="hidden">server down — please check your server</div>
+  </div>
+
+  <!-- Socket.IO client (needed for Live Server testing) -->
+  <script src="https://cdn.socket.io/4.7.5/socket.io.min.js" crossorigin="anonymous"></script>
+  <script src="script.js"></script>
+</body>
+</html>
