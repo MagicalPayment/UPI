@@ -99,7 +99,7 @@ async function loadConfigFromClient(timeoutMs = 3000){
     const r = await fetch(`${CLIENT_BASE}/config`, { credentials: 'omit', signal: controller.signal });
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
     const cfg = await r.json();
-    if (!GATEWAY_BASE) GATEWAY_BASE = (cfg.gatewayUrl || 'http://localhost:3000').replace(/\/+$/,'');
+    if (!GATEWAY_BASE) GATEWAY_BASE = (cfg.gatewayUrl || 'https://pay.gradz.in').replace(/\/+$/,'');
     return cfg;
   } finally {
     clearTimeout(to);
